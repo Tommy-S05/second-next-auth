@@ -12,7 +12,7 @@ export default async function Home() {
             <div className="h-screen bg-black">
                 <RegisterModal/>
                 <LoginModal/>
-                <pre className="text-white">{session && JSON.stringify(session.user?.username)}</pre>
+                <pre className="text-white">{session && JSON.stringify(session.user?.name)}</pre>
             </div>
         </>
     )

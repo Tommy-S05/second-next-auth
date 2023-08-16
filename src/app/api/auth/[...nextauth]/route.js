@@ -34,6 +34,15 @@ export const handler = NextAuth({
         })
     ],
     // debug: process.env.NODE_ENV === 'development',
+    callbacks: {
+        async jwt({token, user}) {
+            return {...token, ...user}
+        },
+        async session({session, token}) {
+            session.user = token;
+            return session;
+        }
+    },
     session: {
         strategy: "jwt",
     },
