@@ -4,6 +4,7 @@ import Modal from "@/app/components/Modal";
 import Input from "@/app/components/Input";
 import useLoginModal from "@/app/hooks/Login";
 import useRegisterModal from "@/app/hooks/Register";
+import {signIn} from "next-auth/react";
 
 export default function LoginModal() {
     const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +20,26 @@ export default function LoginModal() {
         useRegister.onOpen();
         useLogin.onClose();
     }, [isLoading, useRegister, useLogin]);
+    
+    const onSubmit = useCallback(async() => {
+        try {
+            setIsLoading(true);
+            await signIn('credentials', {
+                email,
+                password,
+            });
+            
+            useRegister.onClose();
+            console.log("Account modal closed");
+            
+        } catch (error) {
+            console.log("Account error:");
+            console.error(error);
+            // Handle the error here, show error message, etc.
+        } finally {
+            setIsLoading(false);
+        }
+    }, [useLogin, email, password]);
     
     //body container
     const bodyContainer = (
@@ -61,6 +82,7 @@ export default function LoginModal() {
                 footer={footerContainer}
                 isOpen={useLogin.isOpen}
                 onClose={useLogin.onClose}
+                onSubmit={onSubmit}
             />
         </div>
     )
