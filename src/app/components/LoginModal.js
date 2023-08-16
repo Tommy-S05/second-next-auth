@@ -2,8 +2,8 @@
 import {useCallback, useState} from "react";
 import Modal from "@/app/components/Modal";
 import Input from "@/app/components/Input";
-import useLoginModal from "@/app/components/hooks/Login";
-import useRegisterModal from "@/app/components/hooks/Register";
+import useLoginModal from "@/app/hooks/Login";
+import useRegisterModal from "@/app/hooks/Register";
 
 export default function LoginModal() {
     const [isLoading, setIsLoading] = useState(false)
@@ -60,6 +60,7 @@ export default function LoginModal() {
                 body={bodyContainer}
                 footer={footerContainer}
                 isOpen={useLogin.isOpen}
+                onClose={useLogin.onClose}
             />
         </div>
     )

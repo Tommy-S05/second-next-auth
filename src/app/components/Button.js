@@ -1,16 +1,6 @@
 'use client'
 
-const Button = ({
-                    label,
-                    secondary,
-                    fullWidth,
-                    onClick,
-                    large,
-                    disabled,
-                    outline,
-                    // className,
-                    
-                }) => {
+const Button = ({label, secondary, fullWidth, onClick, large, disabled, outline}) => {
     return (
         <button
             disabled={disabled}

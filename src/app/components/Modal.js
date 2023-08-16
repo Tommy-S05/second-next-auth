@@ -4,10 +4,6 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
 import {useCallback} from "react";
 
 export default function Modal({title, body, disabled, actionLabel, footer, onClose, onSubmit, isOpen}) {
-    // const handleClose = () => {
-    //     onClose()
-    // }
-    
     const handleClose = useCallback(() => {
         if(disabled) return;
         
@@ -21,6 +17,7 @@ export default function Modal({title, body, disabled, actionLabel, footer, onClo
     }, [onSubmit, disabled])
     
     if(!isOpen) return null;
+    
     return (
         <>
             <div
@@ -47,8 +44,8 @@ export default function Modal({title, body, disabled, actionLabel, footer, onClo
                             {body}
                         </div>
                         <div className="flex flex-col gap-2 p-10">
-                            <Button disabled={disabled} label={actionLabel} secondary fullWidth
-                                    large /*onClick={handleSubmit}*/
+                            <Button disabled={disabled} label={actionLabel} secondary fullWidth large
+                                    onClick={handleSubmit}
                             />
                             {footer}
                         </div>

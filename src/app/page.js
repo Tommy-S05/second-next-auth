@@ -1,13 +1,19 @@
-import Modal from "@/app/components/Modal";
+import {getServerSession} from "next-auth";
 import RegisterModal from "@/app/components/RegisterModal";
 import LoginModal from "@/app/components/LoginModal";
+import {handler} from "@/app/api/auth/[...nextauth]/route";
 
-export default function Home() {
+export default async function Home() {
+    
+    const session = await getServerSession(handler)
+    console.log(session)
     return (
-        <main className="h-screen bg-black">
-            {/*<Modal title={'tommy'} actionLabel={'Login'} disabled={false}/>*/}
-            <LoginModal/>
-            <RegisterModal/>
-        </main>
+        <>
+            <div className="h-screen bg-black">
+                <RegisterModal/>
+                <LoginModal/>
+                <pre className="text-white">{session && JSON.stringify(session.user?.username)}</pre>
+            </div>
+        </>
     )
 }
